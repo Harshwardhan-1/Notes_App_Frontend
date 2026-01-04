@@ -39,12 +39,12 @@ export default function HomePage({userData}){
 
 
 
-const handleDelete=async(_id)=>{
-const send={_id};
+const handleDelete=async(id)=>{
+const send={id};
 try{
 const response=await axios.post("https://notes-app-backend-4sb5.onrender.com/api/notes/deleteNotes",send,{withCredentials:true})
 if(response.data.message=== 'findAndDelete'){
-    alert('deleted succwessfully');
+    alert('deleted successfully');
     fetchNotes();
 }
 }catch(err){
