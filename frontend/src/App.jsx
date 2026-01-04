@@ -12,7 +12,7 @@ function App() {
   useEffect(()=>{
     const UpBackend=async()=>{
       try{
-        const response=await axios.get('https://authcore-backend-3.onrender.com',{withCredentials:true});
+        const response=await axios.get('https://notes-app-backend-4sb5.onrender.com',{withCredentials:true});
         console.log(response.data);
       }catch(err){
         if(err.response){
