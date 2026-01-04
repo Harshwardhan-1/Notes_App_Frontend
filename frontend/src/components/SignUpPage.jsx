@@ -11,7 +11,7 @@ export default function SignUpPage(){
     const handle=async(e)=>{
         e.preventDefault();
         try{
-        const send={name,gmail,password};
+        const send={name,gmail,password}; 
         const response=await axios.post("https://notes-app-backend-4sb5.onrender.com/api/all/getSignUp",send,{withCredentials:true});
         if(response.data.message==="Successfully Login"){
             navigate("/signIn");
