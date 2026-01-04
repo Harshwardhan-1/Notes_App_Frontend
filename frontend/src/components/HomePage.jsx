@@ -7,6 +7,10 @@ export default function HomePage({userData}){
     const [title,setTitle]=useState('');
     const [content,setContent]=useState('');
 
+    const [updateId,setUpdateId]=useState('');
+    const [updateTitle,setUpdateTitle]=useState('');
+    const [updateContent,setUpdateContent]=useState('');
+
         const fetchNotes=async()=>{
             try{
      const response=await axios.get('https://notes-app-backend-4sb5.onrender.com/api/notes/getAllNotes',{withCredentials:true});
@@ -44,7 +48,7 @@ const send={id};
 try{
 const response=await axios.post("https://notes-app-backend-4sb5.onrender.com/api/notes/deleteNotes",send,{withCredentials:true})
 if(response.data.message=== 'findAndDelete'){
-    alert('deleted successfully');
+    alert('conform you want to delete');
     fetchNotes();
 }
 }catch(err){
@@ -52,6 +56,33 @@ if(response.data.message=== 'findAndDelete'){
         alert('make sure you enter correct request');
     }
 }
+}
+
+const handleUpdate=async(note)=>{
+setUpdateId(note._id);
+setUpdateTitle(note.title);
+setUpdateContent(note.content);
+}
+
+
+
+const handleUpdatedSubmit=async(e)=>{
+    e.preventDefault();
+    const send={id:updateId,title,updateTitle,content:updateContent};
+    try{
+const response=await axios.post('https://notes-app-backend-4sb5.onrender.com/api/notes/updateNotes',send,{withCredentials:true});
+if(response.data.message=== 'update successfully'){
+    alert('note change successfully');
+    fetchNotes();
+    setUpdateId('');
+    setUpdateTitle('');
+    setUpdateContent('');
+}
+    }catch(err){
+        if(err.response?.data?.message==="id not found"){
+            alert('please do a signIn first');
+        }
+    }
 }
     return(
         <>
@@ -63,6 +94,15 @@ if(response.data.message=== 'findAndDelete'){
         </form>
 
 
+        {
+            updateId && (
+                <form onSubmit={handleUpdatedSubmit}>
+                    <input type="text" value={updateTitle} onChange={(e)=>setUpdateTitle(e.target.value)} />
+                    <input type="text" value={updateContent} onChange={(e)=>setUpdateContent(e.target.value)} />
+                    <button type='submit'>Save changes</button>
+                </form>
+            )
+        }
 
         {
             data.map((note)=>(
@@ -70,7 +110,7 @@ if(response.data.message=== 'findAndDelete'){
                     <h3>{note.title}</h3>
                     <p>{note.content}</p>
                     <button onClick={()=>handleDelete(note._id)}>Delete</button>
-                    <button>Update</button>
+                    <button onClick={()=>handleUpdate(note)}>Update</button>
                 </div>
             ))
         }
