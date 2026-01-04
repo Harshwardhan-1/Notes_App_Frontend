@@ -28,7 +28,7 @@ export default function HomePage({userData}){
     try{
     const response=await axios.post('https://notes-app-backend-4sb5.onrender.com/api/notes/addNotes',send,{withCredentials:true})
     if(response.data.message==="note add successfully"){
-        alert('notes added successfully');
+        alert('conform you want to add task');
         fetchNotes();
         setTitle('');
         setContent('');
@@ -48,7 +48,7 @@ const send={id};
 try{
 const response=await axios.post("https://notes-app-backend-4sb5.onrender.com/api/notes/deleteNotes",send,{withCredentials:true})
 if(response.data.message=== 'findAndDelete'){
-    alert('conform you want to delete');
+    alert('confirm you want to delete');
     fetchNotes();
 }
 }catch(err){

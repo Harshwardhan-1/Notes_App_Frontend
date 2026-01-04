@@ -9,21 +9,19 @@ import {useState} from 'react';
 import {useEffect} from 'react';
 import axios from 'axios';
 function App() {
-  useEffect(()=>{
-    const UpBackend=async()=>{
-      try{
-        const response=await axios.get('https://notes-app-backend-4sb5.onrender.com',{withCredentials:true});
-        console.log(response.data);
-      }catch(err){
-        if(err.response){
-          alert(err.response.data.message || "Invalid email or passowrd");
-        }else{
-          alert('Server went down');
-        }
-      }
+  useEffect(() => {
+  const fetchUser=async()=>{
+    try{
+      const res=await axios.get(
+        "https://notes-app-backend-4sb5.onrender.com/api/all/getUser", { withCredentials: true });
+      setUserData(res.data.user);
+    } catch (err) {
+      console.log("User not logged in or session expired",err);
+      setUserData(null);
     }
-    UpBackend();
-  },[]);
+  };
+  fetchUser();
+}, []);
   const [userData,setUserData]=useState(null);
   const [passwordData,setPasswordData]=useState(null);   
   return (
