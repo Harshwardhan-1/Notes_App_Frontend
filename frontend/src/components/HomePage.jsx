@@ -35,6 +35,24 @@ export default function HomePage({userData}){
     }
 }
 }
+
+
+
+
+const handleDelete=async(_id)=>{
+const send={_id};
+try{
+const response=await axios.post("https://notes-app-backend-4sb5.onrender.com/api/notes/deleteNotes",send,{withCredentials:true})
+if(response.data.message=== 'findAndDelete'){
+    alert('deleted succwessfully');
+    fetchNotes();
+}
+}catch(err){
+    if(err.response?.data?.message=== 'no id found'){
+        alert('make sure you enter correct request');
+    }
+}
+}
     return(
         <>
         <h1>Welcome to the notes group <p>{userData?.name}</p></h1>
@@ -51,6 +69,8 @@ export default function HomePage({userData}){
                 <div key={note._id}>
                     <h3>{note.title}</h3>
                     <p>{note.content}</p>
+                    <button onClick={()=>handleDelete(note._id)}>Delete</button>
+                    <button>Update</button>
                 </div>
             ))
         }
