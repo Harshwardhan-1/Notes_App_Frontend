@@ -2,6 +2,7 @@ import './HomePage.css';
 import { useState } from 'react';
 import axios from 'axios';
 import { useEffect } from 'react';
+import './HomePage.css'
 export default function HomePage({userData}){
     const [data,setData]=useState([]);
     const [title,setTitle]=useState('');
@@ -88,6 +89,7 @@ if(response.data.message=== 'update successfully'){
 }
     return(
         <>
+        <div className="homepage-container">
         <h1>Welcome to the notes group <p>{userData?.name}</p></h1>
         <form onSubmit={handle}>
     <input type="text" placeholder='Enter your title here' value={title} onChange={(e)=>setTitle(e.target.value)} />
@@ -106,9 +108,10 @@ if(response.data.message=== 'update successfully'){
             )
         }
 
+         <div className="notes-list">
         {
             data.map((note)=>(
-                <div key={note._id}>
+                <div className='note-card' key={note._id}>
                     <h3>{note.title}</h3>
                     <p>{note.content}</p>
                     <button onClick={()=>handleDelete(note._id)}>Delete</button>
@@ -116,6 +119,8 @@ if(response.data.message=== 'update successfully'){
                 </div>
             ))
         }
+        </div>
+        </div>
         </>
     );
 }
