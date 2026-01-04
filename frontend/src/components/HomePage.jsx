@@ -68,7 +68,7 @@ setUpdateContent(note.content);
 
 const handleUpdatedSubmit=async(e)=>{
     e.preventDefault();
-    const send={id:updateId,title,updateTitle,content:updateContent};
+    const send={id:updateId,title:updateTitle,content:updateContent};
     try{
 const response=await axios.post('https://notes-app-backend-4sb5.onrender.com/api/notes/updateNotes',send,{withCredentials:true});
 if(response.data.message=== 'update successfully'){
@@ -79,8 +79,10 @@ if(response.data.message=== 'update successfully'){
     setUpdateContent('');
 }
     }catch(err){
-        if(err.response?.data?.message==="id not found"){
+        if(err.response?.data?.message === "id not found"){
             alert('please do a signIn first');
+        } else if(err.response?.status === 401){
+            alert('Unauthorized: please login again');
         }
     }
 }
