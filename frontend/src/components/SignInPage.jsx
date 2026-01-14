@@ -11,7 +11,7 @@ export default function SignInPage({setUserData}){
         e.preventDefault();
         const send={gmail,password};
         try{
-        const response=await axios.post("https://notes-app-backend-4sb5.onrender.com/api/all/getSignIn",send,{withCredentials:true});
+        const response=await axios.post("https://notes-app-backend-910b.onrender.com/api/all/getSignIn",send,{withCredentials:true});
         if(response.data.message==="Login Successfully"){
             setUserData(response.data.data);
             navigate('/HomePage');

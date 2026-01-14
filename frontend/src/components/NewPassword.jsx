@@ -10,7 +10,7 @@ export default function NewPassword(){
         e.preventDefault();
         const send={password,confirmPassword};
         try{
-        const response=await axios.post("https://notes-app-backend-4sb5.onrender.com/api/all/changePassword",send,{withCredentials:true})
+        const response=await axios.post("https://notes-app-backend-910b.onrender.com/api/all/changePassword",send,{withCredentials:true})
         if(response.data.message==="change successfull"){
             navigate('/signIn');
         }

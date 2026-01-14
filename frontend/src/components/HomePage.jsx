@@ -14,7 +14,7 @@ export default function HomePage({userData}){
 
         const fetchNotes=async()=>{
             try{
-     const response=await axios.get('https://notes-app-backend-4sb5.onrender.com/api/notes/getAllNotes',{withCredentials:true});
+     const response=await axios.get('https://notes-app-backend-910b.onrender.com/api/notes/getAllNotes',{withCredentials:true});
        setData(response.data.getAllNotes);
             }catch(err){
                 console.log(err);
@@ -27,7 +27,7 @@ export default function HomePage({userData}){
         e.preventDefault();
     const send={title,content};
     try{
-    const response=await axios.post('https://notes-app-backend-4sb5.onrender.com/api/notes/addNotes',send,{withCredentials:true})
+    const response=await axios.post('https://notes-app-backend-910b.onrender.com/api/notes/addNotes',send,{withCredentials:true})
     if(response.data.message==="note add successfully"){
         alert('conform you want to add task');
         fetchNotes();
@@ -47,7 +47,7 @@ export default function HomePage({userData}){
 const handleDelete=async(id)=>{
 const send={id};
 try{
-const response=await axios.post("https://notes-app-backend-4sb5.onrender.com/api/notes/deleteNotes",send,{withCredentials:true})
+const response=await axios.post("https://notes-app-backend-910b.onrender.com/api/notes/deleteNotes",send,{withCredentials:true})
 if(response.data.message=== 'findAndDelete'){
     alert('confirm you want to delete');
     fetchNotes();
@@ -71,7 +71,7 @@ const handleUpdatedSubmit=async(e)=>{
     e.preventDefault();
     const send={id:updateId,title:updateTitle,content:updateContent};
     try{
-const response=await axios.post('https://notes-app-backend-4sb5.onrender.com/api/notes/updateNotes',send,{withCredentials:true});
+const response=await axios.post('https://notes-app-backend-910b.onrender.com/api/notes/updateNotes',send,{withCredentials:true});
 if(response.data.message=== 'update successfully'){
     alert('note change successfully');
     fetchNotes();

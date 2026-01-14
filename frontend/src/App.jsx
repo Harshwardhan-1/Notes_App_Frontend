@@ -13,7 +13,7 @@ function App() {
   const fetchUser=async()=>{
     try{
       const res=await axios.get(
-        "https://notes-app-backend-4sb5.onrender.com/api/all/getUser", { withCredentials: true });
+        "https://notes-app-backend-910b.onrender.com/api/all/getUser", { withCredentials: true });
       setUserData(res.data.user);
     } catch (err) {
       console.log("User not logged in or session expired",err);
